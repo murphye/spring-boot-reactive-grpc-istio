@@ -13,9 +13,6 @@ import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 
-/**
- * grpcurl -plaintext localhost:50051 hello.Greeter/SayHello
- */
 @SpringBootApplication
 public class HelloGrpcServerApplication {
 
