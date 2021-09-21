@@ -31,7 +31,7 @@ public class GreetWebfluxGrpcClientApplication {
 
 	@PostConstruct
 	public void init() throws InterruptedException {
-		String target = "localhost:50051";
+		String target = "hello-grpc-server:8080";
 		ManagedChannel channel = ManagedChannelBuilder.forTarget(target).usePlaintext().build();
 		futureStub = GreeterGrpc.newFutureStub(channel);
 	}
@@ -55,7 +55,7 @@ public class GreetWebfluxGrpcClientApplication {
 				throw e;
 			}
 
-			// TODO: Do this in a reactive way, but need to find a good adapter for Google's ListenableFuture to Mono
+			// TODO: Do this in a reactive way, but need to find a good way for Google's ListenableFuture to Mono
 			return responseFuture.get().getMessage();
 		}
 	}
