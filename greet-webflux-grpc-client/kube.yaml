@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: greet-grpc-client
+  name: greet-grpc-client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: greet-grpc-client
+  template:
+    metadata:
+      labels:
+        app: greet-grpc-client
+    spec:
+      containers:
+      - image: murphye/greet-webflux-grpc-client
+        name: greet-webflux-grpc-client
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: greet-grpc-client
+  name: greet-grpc-client
+spec:
+  ports:
+  - name: http
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: greet-grpc-client
+  type: ClusterIP

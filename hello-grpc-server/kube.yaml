@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: hello-grpc-server
+  name: hello-grpc-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-grpc-server
+  template:
+    metadata:
+      labels:
+        app: hello-grpc-server
+    spec:
+      containers:
+      - image: murphye/hello-grpc-server:latest
+        name: hello-grpc-server
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: hello-grpc-server
+  name: hello-grpc-server
+spec:
+  ports:
+  - name: grpc
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: hello-grpc-server
+  type: ClusterIP
